@@ -1,4 +1,23 @@
 <html lang="pt-BR">
+
+<!-- Firebase App (compat) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+  // Configuração do seu Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyBkL9To_u0BSBN77xNcR_AJL1Dd0oinIok",
+    authDomain: "comentt-bb0d2.firebaseapp.com",
+    projectId: "comentt-bb0d2",
+    storageBucket: "comentt-bb0d2.appspot.com",
+    messagingSenderId: "185863169917",
+    appId: "1:185863169917:web:b447495dc5d9c962e44e14",
+    measurementId: "G-EF1SDRDGN1"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+
 <head>
     <meta charset="UTF-8">
     <style type="text/css" id="operaUserStyle"></style>
@@ -278,20 +297,49 @@
 
                 <!-- NOVA SEÇÃO DE RESENHA -->
 <section class="resenha-section">
-    <div class="container">
-        <div class="resenha-container" id="resenha">
-            <div class="resenha-foto">
-                <img src="https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black.png" alt="Foto do autor da resenha">
-            </div>
-            <div class="resenha-box">
-                <h3>Minha Resenha</h3>
-                <p>
-                 A história inclui seis mitos, todos adaptados para um público mais jovem. O autor buscou remover elementos mais pesados presentes nas narrativas originais, que frequentemente abordam temas como violência e sexualidade. Em vez disso, ele focou em aspectos mais morais e leves, com a intenção de tornar essas histórias acessíveis a crianças e jovens, mantendo, ao mesmo tempo, a essência das narrativas originais. Assim, as histórias são adaptadas para atender a esse público, preservando um pouco a história real
-                </p>
-                <span class="resenha-autor">— Kaio Guilherme</span>
-            </div>
-        </div>
+  <div class="container">
+
+    <!-- Bloco de avaliação por estrelas -->
+    <div class="avaliacao-container" style="margin: 30px 0 10px 0; text-align: center;">
+      <div style="font-size: 1.4em; font-weight: bold; color: #ffe066;" id="media-nota">0.0</div>
+      <div id="avaliacao-estrelas" style="font-size: 2em; color: gold; cursor: pointer;">
+        <span data-estrela="1">&#9733;</span>
+        <span data-estrela="2">&#9733;</span>
+        <span data-estrela="3">&#9733;</span>
+        <span data-estrela="4">&#9733;</span>
+        <span data-estrela="5">&#9733;</span>
+      </div>
+      <div id="avaliacao-votos" style="font-size: 0.95em; color: #eaeaea; margin-top: 2px;">0 votos</div>
     </div>
+
+    <!-- Sua resenha fixa -->
+    <div class="resenha-container" id="resenha">
+      <div class="resenha-foto">
+        <img src="https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black.png" alt="Foto do autor da resenha">
+      </div>
+      <div class="resenha-box">
+        <h3>Minha Resenha</h3>
+        <p>
+         A história inclui seis mitos, todos adaptados para um público mais jovem. O autor buscou remover elementos mais pesados presentes nas narrativas originais, que frequentemente abordam temas como violência e sexualidade. Em vez disso, ele focou em aspectos mais morais e leves, com a intenção de tornar essas histórias acessíveis a crianças e jovens, mantendo, ao mesmo tempo, a essência das narrativas originais. Assim, as histórias são adaptadas para atender a esse público, preservando um pouco a história real
+        </p>
+        <span class="resenha-autor">— Kaio Guilherme</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="comentarios-section">
+    <div class="container">
+      <div id="comentarios-lista"></div>
+      <h3>Deixe sua resenha</h3>
+      <!-- Comentários aparecem aqui, antes do formulário -->
+      <form id="comentario-form">
+        <input type="text" id="titulo" placeholder="Título" required><br>
+        <textarea id="texto" placeholder="Sua resenha" required></textarea><br>
+        <input type="text" id="autor" placeholder="Seu nome ou apelido" required><br>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </section>
 </section>
 <!-- FIM DA NOVA SEÇÃO -->
 
@@ -349,50 +397,98 @@ function mostrarResenhaAoScroll() {
 window.addEventListener('scroll', mostrarResenhaAoScroll);
 window.addEventListener('DOMContentLoaded', mostrarResenhaAoScroll);
 
-// Sistema de avaliação por estrelas (simulado)
-let votos = 160;
-let somaNotas = 4.8 * votos;
+// Avaliação por estrelas com Firebase
+let votos = 0;
+let somaNotas = 0;
+
+// Carregar média e votos do Firestore
+async function carregarAvaliacao() {
+  const doc = await db.collection('avaliacao').doc('media').get();
+  if (doc.exists) {
+    const data = doc.data();
+    votos = data.votos || 0;
+    somaNotas = data.somaNotas || 0;
+  }
+  atualizarEstrelas(Math.round(somaNotas / Math.max(votos,1)));
+  atualizarMedia();
+}
+carregarAvaliacao();
 
 function atualizarEstrelas(nota) {
-    const estrelas = document.querySelectorAll('#avaliacao-estrelas span');
-    estrelas.forEach((estrela, i) => {
-        estrela.classList.toggle('selecionada', i < nota);
-    });
+  const estrelas = document.querySelectorAll('#avaliacao-estrelas span');
+  estrelas.forEach((estrela, i) => {
+    estrela.style.color = i < nota ? '#ffe066' : '#222';
+  });
 }
 
 function atualizarMedia() {
-    const media = (somaNotas / votos).toFixed(1);
-    document.getElementById('media-nota').textContent = media;
-    document.getElementById('avaliacao-votos').textContent = votos + ' votos';
+  const media = votos ? (somaNotas / votos).toFixed(2) : "0.00";
+  document.getElementById('media-nota').textContent = media;
+  document.getElementById('avaliacao-votos').textContent = votos + (votos === 1 ? ' voto' : ' votos');
+  atualizarEstrelas(Math.round(somaNotas / Math.max(votos,1)));
 }
 
+// Evento de clique nas estrelas
 document.querySelectorAll('#avaliacao-estrelas span').forEach((estrela, i) => {
-    estrela.addEventListener('mouseenter', () => {
-        atualizarEstrelas(i + 1);
+  estrela.addEventListener('mouseenter', () => {
+    atualizarEstrelas(i + 1);
+  });
+  estrela.addEventListener('mouseleave', () => {
+    atualizarEstrelas(Math.round(somaNotas / Math.max(votos,1)));
+  });
+  estrela.addEventListener('click', async () => {
+    votos++;
+    somaNotas += (i + 1);
+    await db.collection('avaliacao').doc('media').set({
+      votos,
+      somaNotas
     });
-    estrela.addEventListener('mouseleave', () => {
-        atualizarEstrelas(Math.round(somaNotas / votos));
-    });
-    estrela.addEventListener('click', () => {
-        votos++;
-        somaNotas += (i + 1);
-        atualizarMedia();
-        atualizarEstrelas(Math.round(somaNotas / votos));
-        alert('Obrigado pelo seu voto!');
-    });
-});
-
-// Mostrar detalhes ao clicar na média ou votos
-document.getElementById('avaliacao-circulo')?.addEventListener('click', () => {
-    alert(`Média: ${(somaNotas / votos).toFixed(2)}\nTotal de votos: ${votos}`);
-});
-document.getElementById('avaliacao-votos')?.addEventListener('click', () => {
-    alert(`Média: ${(somaNotas / votos).toFixed(2)}\nTotal de votos: ${votos}`);
+    atualizarMedia();
+    atualizarEstrelas(Math.round(somaNotas / votos));
+    
+  });
 });
 
 // Inicialização
 atualizarEstrelas(Math.round(somaNotas / votos));
 atualizarMedia();
-    </script>
+
+  // Salvar comentário
+  document.getElementById('comentario-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const titulo = document.getElementById('titulo').value;
+    const texto = document.getElementById('texto').value;
+    const autor = document.getElementById('autor').value;
+    await db.collection('comentarios').add({
+      titulo,
+      texto,
+      autor,
+      data: new Date()
+    });
+    this.reset();
+  });
+
+  // Listar comentários em tempo real
+  db.collection('comentarios').orderBy('data', 'desc').onSnapshot(snapshot => {
+    const lista = document.getElementById('comentarios-lista');
+    lista.innerHTML = '';
+    snapshot.forEach(doc => {
+      const c = doc.data();
+      lista.innerHTML += `
+        <div class="resenha-container visible">
+          <div class="resenha-foto">
+            <img src="https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black.png" alt="Foto do autor">
+          </div>
+          <div class="resenha-box">
+            <h3>${c.titulo}</h3>
+            <p>${c.texto}</p>
+            <span class="resenha-autor">— ${c.autor}</span>
+          </div>
+        </div>
+      `;
+    });
+  });
+</script>
+
 </body>
 </html>
