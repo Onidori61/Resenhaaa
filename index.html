@@ -1,0 +1,398 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css" id="operaUserStyle"></style>
+    <link rel="icon" href="https://i.ibb.co/nNFr4WBL/image.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Resenha</title>
+    <link rel="stylesheet" id="madara-css-css" href="https://manhastro.net/wp-content/themes/madara/style.css?ver=1.6.6.2.3" type="text/css" media="all">
+    <style id="madara-css-inline-css" type="text/css">
+        .c-blog__heading.style-2 i {
+            background: linear-gradient(to right, #15191a 40%, #16191a);
+        }
+        .c-blog__heading.style-2 i:after {
+            border-left-color: #11181a;
+        }
+        .site-header .main-navigation.style-1 {
+            background: #0e1221 !important;
+        }
+        .main-color {
+            color: #0a0d0e;
+        }
+
+         body.text-ui-light.manga-page .profile-manga .tab-summary .summary_content_wrap .summary_content {
+         border: 1px solid #fff !important;
+         background-color: rgba(68, 66, 66, 0.3);
+         border-radius: 15px;
+  }
+
+        .main-bg {
+            background-color: #13191a;
+        }
+        .site-content {
+            min-height: 100vh;
+            background-color: #08090c;
+        }
+        .site-footer {
+            padding: 10px 0;
+        }
+        .col-md-12, .col-sm-12 {
+            padding-right: 1px;
+            padding-left: 1px;
+        }
+        .item-title {
+            margin-top: 15px !important;
+        }
+        .c-breadcrumb-wrapper {
+            padding: 0 0 10px 0;
+        }
+        body.text-ui-light .widget.c-popular .popular-item-wrap {
+            border-radius: 15px;
+        }
+        body.text-ui-light .site-footer {
+            border-bottom: solid 10px #151818;
+        }
+        .gif-container {
+            position: absolute;
+            bottom: 0;
+            padding: 0 15px 30px 15px;
+        }
+        .triangle-icon {
+            cursor: pointer;
+            width: 60px;
+        }
+        .triangle-icon i {
+            color: #e45757;
+            font-size: 35px;
+        }
+        @media only screen and (max-width: 767px) {
+            .triangle-icon {
+                width: 45px;
+            }
+            .triangle-icon i {
+                font-size: 25px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" id="mycred-front-css" href="https://manhastro.net/wp-content/plugins/mycred/assets/css/mycred-front.css?ver=2.6.4" type="text/css" media="all">
+    <link rel="stylesheet" id="mycred-social-share-icons-css" href="https://manhastro.net/wp-content/plugins/mycred/assets/css/mycred-social-icons.css?ver=2.6.4" type="text/css" media="all">
+    <link rel="stylesheet" id="mycred-social-share-style-css" href="https://manhastro.net/wp-content/plugins/mycred/assets/css/mycred-social-share.css?ver=2.6.4" type="text/css" media="all">
+    <style>
+        /* Resenha flutuante personalizada */
+.resenha-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin: 40px 0 0 0;
+    padding: 28px 32px;
+    background: rgba(30,30,30,0.92);
+    border-radius: 20px;
+    border: 1.5px solid #fff;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
+    max-width: 650px;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
+.resenha-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.resenha-foto {
+    min-width: 80px;
+    min-height: 80px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2.5px solid #fff;
+    background: #222;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.resenha-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.resenha-box {
+    flex: 1;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.resenha-box h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.25em;
+    color: #e45757;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.resenha-box p {
+    margin: 0 0 10px 0;
+    font-size: 1.08em;
+    line-height: 1.6;
+    color: #eaeaea;
+}
+.resenha-autor {
+    font-size: 0.98em;
+    color: #e45757;
+    font-style: italic;
+    margin-top: 8px;
+    align-self: flex-end;
+}
+@media (max-width: 700px) {
+    .resenha-container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 18px 10px;
+        gap: 14px;
+        max-width: 100%;
+    }
+    .resenha-foto {
+        margin-bottom: 8px;
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+        min-height: 60px;
+    }
+}
+    </style>
+</head>
+<body class="bp-legacy wp-singular wp-manga-template-default single single-wp-manga postid-17151 logged-in wp-embed-responsive wp-theme-madara wp-manga-page manga-page pmpro-body-has-access youzify-blue-scheme bm-messages-light page header-style-1 sticky-enabled sticky-style-2 text-ui-light sticky-for-mobile aa-prefix-manha- js wpdiscuz_7.6.19 cookies-set cookies-refused">
+    <div class="wrap">
+        <div class="body-wrap">
+            <header class="site-header">
+                <div class="c-header__top">
+                    <ul class="search-main-menu">
+                        <li>
+                            <form id="blog-post-search" class="ajax" action="https://manhastro.net/" method="get">
+                                <input type="text" placeholder="Pesquisar…" name="s" value="">
+                                <input type="submit" value="Search (Buscar)">
+                                <div class="loader-inner line-scale">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                    <div class="main-navigation style-1">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="main-navigation_wrap">
+                                        <div class="wrap_branding">
+                                            <a class="logo" href="https://www.amazon.com.br/Gregos-Histórias-Extraordinárias-Monstros-Leitores/dp/853781587X" title="Resenha">
+                                                <img class="img-responsive" width="450" height="150" src="https://i.ibb.co/HpL2G6qc/image-1.webp" alt="Manhastro">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mobile-menu menu-collapse off-canvas">
+                    <div class="close-nav">
+                        <button class="menu_icon__close">
+                            <span></span> <span></span>
+                        </button>
+                    </div>
+                    <nav class="off-menu">
+                        <ul id="menu-main-menu-1" class="nav navbar-nav main-navbar">
+                            <li id="nav-menu-item-5330" class="main-menu-item menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page menu-item-home">
+                                <a href="https://manhastro.net/" class="menu-link main-menu-link">
+                                    <i class="_mi _before dashicons dashicons-admin-home" aria-hidden="true"></i><span>Home</span>
+                                </a>
+                            </li>
+                            <li id="nav-menu-item-2887" class="main-menu-item menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page current_page_parent">
+                                <a href="https://manhastro.net/obras/" class="menu-link main-menu-link">
+                                    <i class="_mi _before dashicons dashicons-book" aria-hidden="true"></i><span>Obras</span>
+                                </a>
+                            </li>
+                            <li id="nav-menu-item-35046" class="main-menu-item menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page">
+                                <a href="https://manhastro.net/discord/" class="menu-link main-menu-link">
+                                    <i class="_mi _before dashicons dashicons-groups" aria-hidden="true"></i><span>Discord</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="gif-container">
+                        <a href="/discord">
+                            <img src="/gif/discord.gif" alt="GIF Animado">
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="site-content">
+            <div class="post-17151 wp-manga type-wp-manga status-publish has-post-thumbnail hentry wp-manga-release-443 wp-manga-author-husang-cho wp-manga-genre-acao wp-manga-genre-marciais wp-manga-genre-aventura wp-manga-genre-fantasia wp-manga-genre-manhua pmpro-has-access">
+                <div class="profile-manga summary-layout-1" style="background-color:#08090c;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12">
+                                <div class="c-breadcrumb-wrapper"></div>
+                                <div class="tab-summary">
+                                    <div class="summary_image">
+                                        <a href="#">
+                                            <img width="350" height="476" src="https://i.ibb.co/bjfFS6Xm/image.png" class="img-responsive effect-fade" alt="Mitos Gregos">
+                                        </a>
+                                    </div>
+                                    <div class="summary_content_wrap">
+                                        <div class="summary_content">
+                                            <div class="post-content">
+                                                <h2>Mitos gregos I: edição ilustrada - Nathaniel Hawthorne</h2>
+                                                <div class="post-content_item item_genres">
+                                                    <div class="summary-heading">
+                                                        <h5>Gênero (s)</h5>
+                                                    </div>
+                                                    <div class="summary-content">
+                                                        <div class="genres-content">
+                                                            <a rel="tag">Conto de fadas</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="description-summary">
+                                                    <div class="summary__content" style="text-align: justify; padding: 0 15px 0 0; color: #cccc;">
+                                                        <p>Descubra as fascinantes histórias da mitologia clássica com "Mitos Gregos", uma obra encantadora de Nathaniel Hawthorne, adaptada para jovens leitores. Este livro apresenta uma coleção de mitos recontados de forma acessível e envolvente, perfeita para despertar a imaginação das crianças e ensinar valiosas lições morais.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- RESENHA PERSONALIZADA -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NOVA SEÇÃO DE RESENHA -->
+<section class="resenha-section">
+    <div class="container">
+        <div class="resenha-container" id="resenha">
+            <div class="resenha-foto">
+                <img src="https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black.png" alt="Foto do autor da resenha">
+            </div>
+            <div class="resenha-box">
+                <h3>Minha Resenha</h3>
+                <p>
+                 A história inclui seis mitos, todos adaptados para um público mais jovem. O autor buscou remover elementos mais pesados presentes nas narrativas originais, que frequentemente abordam temas como violência e sexualidade. Em vez disso, ele focou em aspectos mais morais e leves, com a intenção de tornar essas histórias acessíveis a crianças e jovens, mantendo, ao mesmo tempo, a essência das narrativas originais. Assim, as histórias são adaptadas para atender a esse público, preservando um pouco a história real
+                </p>
+                <span class="resenha-autor">— Kaio Guilherme</span>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FIM DA NOVA SEÇÃO -->
+
+                <div class="c-page-content style-1">
+                    <div class="content-area">
+                        <div class="container">
+                            <div class="row">
+                                <div class="main-col col-md-12 col-sm-12 sidebar-hidden">
+                                    <div class="main-col-inner">
+                                        <div class="c-page">
+                                            <div class="c-page__content">
+                                                <div id="manga-chapters-holder" data-id="17151"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>	
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="site-footer">
+            <div class="bottom-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="nav-footer">
+                                <ul class="list-inline font-nav">
+                                    <li id="menu-item-10709" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10709">
+                                        <a href="https://wa.me/5514997566581">Contato</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="copyright">
+                                <p>É só um teste, provavelmente nunca vai sair disso.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script>
+// Função para mostrar a resenha ao aparecer na tela
+function mostrarResenhaAoScroll() {
+    var resenha = document.getElementById('resenha');
+    if (!resenha) return;
+    var rect = resenha.getBoundingClientRect();
+    var windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top < windowHeight - 80) {
+        resenha.classList.add('visible');
+    }
+}
+window.addEventListener('scroll', mostrarResenhaAoScroll);
+window.addEventListener('DOMContentLoaded', mostrarResenhaAoScroll);
+
+// Sistema de avaliação por estrelas (simulado)
+let votos = 160;
+let somaNotas = 4.8 * votos;
+
+function atualizarEstrelas(nota) {
+    const estrelas = document.querySelectorAll('#avaliacao-estrelas span');
+    estrelas.forEach((estrela, i) => {
+        estrela.classList.toggle('selecionada', i < nota);
+    });
+}
+
+function atualizarMedia() {
+    const media = (somaNotas / votos).toFixed(1);
+    document.getElementById('media-nota').textContent = media;
+    document.getElementById('avaliacao-votos').textContent = votos + ' votos';
+}
+
+document.querySelectorAll('#avaliacao-estrelas span').forEach((estrela, i) => {
+    estrela.addEventListener('mouseenter', () => {
+        atualizarEstrelas(i + 1);
+    });
+    estrela.addEventListener('mouseleave', () => {
+        atualizarEstrelas(Math.round(somaNotas / votos));
+    });
+    estrela.addEventListener('click', () => {
+        votos++;
+        somaNotas += (i + 1);
+        atualizarMedia();
+        atualizarEstrelas(Math.round(somaNotas / votos));
+        alert('Obrigado pelo seu voto!');
+    });
+});
+
+// Mostrar detalhes ao clicar na média ou votos
+document.getElementById('avaliacao-circulo')?.addEventListener('click', () => {
+    alert(`Média: ${(somaNotas / votos).toFixed(2)}\nTotal de votos: ${votos}`);
+});
+document.getElementById('avaliacao-votos')?.addEventListener('click', () => {
+    alert(`Média: ${(somaNotas / votos).toFixed(2)}\nTotal de votos: ${votos}`);
+});
+
+// Inicialização
+atualizarEstrelas(Math.round(somaNotas / votos));
+atualizarMedia();
+    </script>
+</body>
+</html>

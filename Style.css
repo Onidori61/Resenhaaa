@@ -1,0 +1,66 @@
+/* Estilo geral da página */
+body {
+    background-color: #1a1a1a; /* Cor de fundo escura */
+    color: #f5f5f5; /* Cor do texto */
+    font-family: 'Arial', sans-serif; /* Fonte */
+    margin: 0;
+    padding: 20px;
+}
+
+/* Estilo do cabeçalho */
+.header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 2em; /* Tamanho do título */
+    margin-right: auto;
+}
+
+/* Estilo do container da resenha */
+.review-container {
+    display: flex;
+    border: 1px solid #008080; /* Borda turquesa */
+    border-radius: 8px;
+    background-color: #2a2a2a; /* Fundo da resenha */
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Estilo da imagem do livro */
+.book-image {
+    max-width: 150px; /* Tamanho máximo da imagem */
+    margin-right: 20px; /* Espaço à direita da imagem */
+}
+
+/* Estilo do título da resenha */
+.review-title {
+    font-size: 1.5em; /* Tamanho do título da resenha */
+    margin: 0;
+}
+
+/* Estilo dos detalhes da resenha */
+.review-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px; /* Espaço acima dos detalhes */
+}
+
+/* Estilo do texto de descrição */
+.review-description {
+    margin-top: 15px; /* Espaço acima da descrição */
+    line-height: 1.5; /* Espaçamento entre linhas */
+}
+
+/* Estilo do botão ou link, se houver */
+.button {
+    background-color: #008080; /* Cor do botão */
+    color: #fff; /* Cor do texto do botão */
+    padding: 10px 20px; /* Padding do botão */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de pointer */
+    margin-top: 10px; /* Espaço no topo */
+}
